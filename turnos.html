@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Turnos - MichiCare 💜</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+
+/* BODY */
+body{
+  font-family:'Poppins', sans-serif;
+  background:linear-gradient(135deg,#2d143a,#4c1d5a);
+  color:white;
+  text-align:center;
+  padding:30px;
+}
+
+/* TITULO */
+h1{
+  margin-bottom:20px;
+  text-shadow:0 0 15px white;
+}
+
+/* FORM */
+form{
+  background:#ffffff15;
+  padding:20px;
+  border-radius:20px;
+  max-width:350px;
+  margin:auto;
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+/* INPUTS */
+input, select{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border-radius:10px;
+  border:none;
+}
+
+/* BOTON */
+button{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(135deg,#ff7ac6,#d946ef);
+  border:none;
+  border-radius:30px;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* RESULTADO */
+#resultado{
+  margin-top:20px;
+  background:#ffffff20;
+  padding:15px;
+  border-radius:15px;
+  display:none;
+}
+
+a{
+  display:block;
+  margin-top:20px;
+  color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Sacar Turno 🐾</h1>
+<img src="https://images.unsplash.com/photo-1517849845537-4d257902454a" width="250">
+
+<form onsubmit="guardarTurno(event)">
+
+<input type="text" id="nombre" placeholder="Nombre del animal" required>
+
+<select id="especie" required>
+  <option value="">Especie</option>
+  <option>Perro</option>
+  <option>Gato</option>
+  <option>Loro</option>
+  <option>Otro</option>
+</select>
+
+<input type="number" id="peso" placeholder="Peso (kg)" required>
+
+<select id="consulta" required>
+  <option value="">Tipo de consulta</option>
+  <option>Vacunación</option>
+  <option>Antirrábica</option>
+  <option>Refuerzo antiparasitario</option>
+  <option>Control</option>
+  <option>Emergencia</option>
+</select>
+
+<button type="Confirmarturno.html">Confirmar turno 💜</button>
+
+<div id="resultado"></div>
+
+<a href="index.html">⬅ Volver al inicio</a>
+
+<script>
+
+function guardarTurno(e){
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const especie = document.getElementById("especie").value;
+  const peso = document.getElementById("peso").value;
+  const consulta = document.getElementById("consulta").value;
+
+  const resultado = document.getElementById("resultado");
+
+  resultado.style.display = "block";
+
+  resultado.innerHTML = `
+    <h3>Turno confirmado 💜</h3>
+    <p><b>Mascota:</b> ${nombre}</p>
+    <p><b>Especie:</b> ${especie}</p>
+    <p><b>Peso:</b> ${peso} kg</p>
+    <p><b>Consulta:</b> ${consulta}</p>
+  `;
+  <h3>Te esperamos 🐾</h3>
+}
+
+</script>
+
+</body>
+</html>

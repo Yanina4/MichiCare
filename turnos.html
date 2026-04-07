@@ -2,17 +2,15 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Turnos - MichiCare 💜</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* RESET */
 *{margin:0;padding:0;box-sizing:border-box;}
 
-/* BODY */
 body{
   font-family:'Poppins', sans-serif;
   background:linear-gradient(135deg,#2d143a,#4c1d5a);
@@ -21,13 +19,11 @@ body{
   padding:30px;
 }
 
-/* TITULO */
 h1{
   margin-bottom:20px;
   text-shadow:0 0 15px white;
 }
 
-/* FORM */
 form{
   background:#ffffff15;
   padding:20px;
@@ -37,7 +33,6 @@ form{
   box-shadow:0 0 20px rgba(0,0,0,0.3);
 }
 
-/* INPUTS */
 input, select{
   width:100%;
   padding:10px;
@@ -46,7 +41,6 @@ input, select{
   border:none;
 }
 
-/* BOTON */
 button{
   width:100%;
   padding:12px;
@@ -63,13 +57,19 @@ button:hover{
   transform:scale(1.05);
 }
 
-/* RESULTADO */
 #resultado{
   margin-top:20px;
   background:#ffffff20;
   padding:15px;
   border-radius:15px;
-  display:none;
+}
+
+.card{
+  background:#ffffff20;
+  margin:10px auto;
+  padding:15px;
+  border-radius:15px;
+  max-width:350px;
 }
 
 a{
@@ -84,6 +84,7 @@ a{
 <body>
 
 <h1>Sacar Turno 🐾</h1>
+
 <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a" width="250">
 
 <form onsubmit="guardarTurno(event)">
@@ -109,35 +110,83 @@ a{
   <option>Emergencia</option>
 </select>
 
-<button type="Confirmarturno.html">Confirmar turno 💜</button>
+<input type="date" id="fecha" required>
+<input type="time" id="hora" required>
+
+<button type="submit">Confirmar turno 💜</button>
+
+</form>
 
 <div id="resultado"></div>
+
+<h2 style="margin-top:30px;">📅 Turnos guardados</h2>
+<div id="turnos"></div>
 
 <a href="index.html">⬅ Volver al inicio</a>
 
 <script>
 
+// 👉 GUARDAR TURNO
 function guardarTurno(e){
   e.preventDefault();
 
-  const nombre = document.getElementById("nombre").value;
-  const especie = document.getElementById("especie").value;
-  const peso = document.getElementById("peso").value;
-  const consulta = document.getElementById("consulta").value;
+  const turno = {
+    nombre: document.getElementById("nombre").value,
+    especie: document.getElementById("especie").value,
+    peso: document.getElementById("peso").value,
+    consulta: document.getElementById("consulta").value,
+    fecha: document.getElementById("fecha").value,
+    hora: document.getElementById("hora").value
+  };
 
-  const resultado = document.getElementById("resultado");
+  let turnos = JSON.parse(localStorage.getItem("turnos")) || [];
+  turnos.push(turno);
+  localStorage.setItem("turnos", JSON.stringify(turnos));
 
-  resultado.style.display = "block";
+  document.getElementById("resultado").innerHTML = `
+    <h2>🐾 Turno confirmado</h2>
+    <p><b>Mascota:</b> ${turno.nombre}</p>
+    <p><b>Especie:</b> ${turno.especie}</p>
+    <p><b>Peso:</b> ${turno.peso} kg</p>
+    <p><b>Consulta:</b> ${turno.consulta}</p>
+    <p><b>Fecha:</b> ${turno.fecha}</p>
+    <p><b>Hora:</b> ${turno.hora}</p>
 
-  resultado.innerHTML = `
-    <h3>Turno confirmado 💜</h3>
-    <p><b>Mascota:</b> ${nombre}</p>
-    <p><b>Especie:</b> ${especie}</p>
-    <p><b>Peso:</b> ${peso} kg</p>
-    <p><b>Consulta:</b> ${consulta}</p>
+    <h3>📞 Contacto para cancelación</h3>
+    <p>+54 9 XXX XXX XXXX</p>
   `;
-  <h3>Te esperamos 🐾</h3>
+
+  document.querySelector("form").reset();
+
+  mostrarTurnos();
 }
+
+
+// 👉 MOSTRAR TURNOS
+function mostrarTurnos(){
+
+  const turnos = JSON.parse(localStorage.getItem("turnos")) || [];
+  const contenedor = document.getElementById("turnos");
+
+  contenedor.innerHTML = "";
+
+  turnos.forEach(t => {
+    contenedor.innerHTML += `
+      <div class="card">
+        <p><b>Mascota:</b> ${t.nombre}</p>
+        <p><b>Especie:</b> ${t.especie}</p>
+        <p><b>Peso:</b> ${t.peso} kg</p>
+        <p><b>Consulta:</b> ${t.consulta}</p>
+        <p><b>Fecha:</b> ${t.fecha}</p>
+        <p><b>Hora:</b> ${t.hora}</p>
+      </div>
+    `;
+  });
+}
+
+
+// 👉 CARGAR AL INICIO
+mostrarTurnos();
 
 </script>
 

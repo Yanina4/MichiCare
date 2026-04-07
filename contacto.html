@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contacto - MichiCare 💜</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
@@ -133,20 +133,7 @@ a.volver{
     <a href="#">🌸 Twitter</a>
   </div>
 
-  <!-- FORMULARIO -->
-  <form onsubmit="enviarMensaje(event)">
-
-    <input type="text" id="nombre" placeholder="Tu nombre" required>
-
-    <textarea id="mensaje" placeholder="Escribí tu mensaje..." required></textarea>
-
-    <button type="submit">Enviar 💜</button>
-
-  </form>
-
-  <div id="mensajeOK">Mensaje enviado correctamente 💜</div>
-
-</div>
+ 
 
 <a href="index.html" class="volver">⬅ Volver al inicio</a>
 
@@ -159,6 +146,42 @@ function enviarMensaje(e){
 
   document.getElementById("nombre").value = "";
   document.getElementById("mensaje").value = "";
+}
+
+
+// 👉 FUNCIÓN PARA TURNOS
+function guardarTurno(e){
+  e.preventDefault();
+
+  const turno = {
+    nombre: document.getElementById("nombre").value,
+    especie: document.getElementById("especie").value,
+    peso: document.getElementById("peso").value,
+    consulta: document.getElementById("consulta").value,
+    fecha: document.getElementById("fecha").value,
+    hora: document.getElementById("hora").value
+  };
+
+  let turnos = JSON.parse(localStorage.getItem("turnos")) || [];
+  turnos.push(turno);
+  localStorage.setItem("turnos", JSON.stringify(turnos));
+
+  document.getElementById("resultado").style.display = "block";
+
+  document.getElementById("resultado").innerHTML = `
+    <h2>🐾 Turno confirmado</h2>
+    <p><b>Mascota:</b> ${turno.nombre}</p>
+    <p><b>Especie:</b> ${turno.especie}</p>
+    <p><b>Peso:</b> ${turno.peso} kg</p>
+    <p><b>Consulta:</b> ${turno.consulta}</p>
+    <p><b>Fecha:</b> ${turno.fecha}</p>
+    <p><b>Hora:</b> ${turno.hora}</p>
+
+    <hr>
+
+    <h3>📞 Contacto para cancelación</h3>
+    <p>+54 9 XXX XXX XXXX</p>
+  `;
 }
 
 </script>

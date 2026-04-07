@@ -16,7 +16,7 @@ body{
   background:linear-gradient(135deg,#2d143a,#4c1d5a);
   color:white;
   text-align:center;
-  padding:30px;
+  padding:15px;
 }
 
 h1{
@@ -31,26 +31,25 @@ form{
   max-width:350px;
   margin:auto;
   box-shadow:0 0 20px rgba(0,0,0,0.3);
+  width:100%;
 }
 
-input, select{
+input, select, button{
   width:100%;
   padding:10px;
   margin:10px 0;
   border-radius:10px;
   border:none;
+  font-size:16px;
 }
 
 button{
-  width:100%;
-  padding:12px;
   background:linear-gradient(135deg,#ff7ac6,#d946ef);
-  border:none;
-  border-radius:30px;
   color:white;
   font-weight:bold;
   cursor:pointer;
   transition:0.3s;
+  border-radius:30px;
 }
 
 button:hover{
@@ -62,6 +61,10 @@ button:hover{
   background:#ffffff20;
   padding:15px;
   border-radius:15px;
+  max-width:350px;
+  margin-left:auto;
+  margin-right:auto;
+  word-break: break-word;
 }
 
 .card{
@@ -70,6 +73,12 @@ button:hover{
   padding:15px;
   border-radius:15px;
   max-width:350px;
+  width:90%;
+}
+
+input[type="date"],
+input[type="time"]{
+  font-size:16px;
 }
 
 a{
@@ -126,7 +135,6 @@ a{
 
 <script>
 
-// 👉 GUARDAR TURNO
 function guardarTurno(e){
   e.preventDefault();
 
@@ -162,7 +170,6 @@ function guardarTurno(e){
 }
 
 
-// 👉 MOSTRAR TURNOS
 function mostrarTurnos(){
 
   const turnos = JSON.parse(localStorage.getItem("turnos")) || [];
@@ -184,8 +191,6 @@ function mostrarTurnos(){
   });
 }
 
-
-// 👉 CARGAR AL INICIO
 mostrarTurnos();
 
 </script>
